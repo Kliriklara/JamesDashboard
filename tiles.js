@@ -57,6 +57,21 @@ function TilesViewModel() {
     ];
 
     self.tiles = ko.observableArray([
+      new Tile({ name: "localhost", section: "development", link: "localhost:3000", icon: "icon-home-3", style: "app "+self.availableColors[0].key}), 
+      new Tile({ name: "confluence", section: "development", link: "http://goltermann.cc:8090/dashboard.action", icon: "icon-new", style: "app "+self.availableColors[2].key}), 
+      new Tile({ name: "pivotaltracker", section: "development", link: "https://www.pivotaltracker.com/projects/464183", style: "wide imagetext "+self.availableColors[1].key, texty: "Pivotal Tracker is a simple, effective, agile project management tool that allows your team to collaborate ..."}), 
+      new Tile({ name: "sublime text IDE", section: "development", link: " http://www.sublimetext.com/", icon: "icon-pen-alt2", style: "app "+self.availableColors[4].key}), 
+ 
+      new Tile({ name: "twitter bootstrap", section: "documentations", link: "http://twitter.github.com/bootstrap/", style: "wide imagetext "+self.availableColors[6].key, image: "bootmetro/img/My Apps.png", texty: "Sleek, intuitive, and powerful front-end framework for faster and easier web development"}), 
+      new Tile({ name: "ember.js", section: "documentations", link: "http://emberjs.com/", style: "wide imagetext "+self.availableColors[0].key, image: "bootmetro/img/My Apps.png", image: "bootmetro/img/RegEdit.png", texty: "A framework for creating ambitious web applications."}), 
+      new Tile({ name: "SASS rails", section: "documentations", link: "https://github.com/rails/sass-rails", image: "bootmetro/img/Devices.png", style: "app "+self.availableColors[0].key}), 
+      new Tile({ name: "Compass", section: "documentations", link: "http://compass-style.org/", style: "app "+self.availableColors[4].key}), 
+      new Tile({ name: "Ruby Gems", section: "documentations", link: "http://rubygems.org/gems/rails", style: "app "+self.availableColors[2].key}), 
+
+      new Tile({ name: "facebook", section: "socialmedia", link: "https://www.facebook.com/pages/JAMES/222346854538989", style: "app "+self.availableColors[6].key, icon: "icon-facebook-2"}), 
+      new Tile({ name: "vimeo", section: "socialmedia", link: "http://vimeo.com/56994473", style: "app "+self.availableColors[5].key, icon: "icon-vimeo"}), 
+      new Tile({ name: "twitter", section: "socialmedia", link: "https://twitter.com/jamesapp_com", style: "app "+self.availableColors[1].key, icon: "icon-twitter"}), 
+      new Tile({ name: "instagram", section: "socialmedia", link: "http://vimeo.com/56994473", style: "app "+self.availableColors[4].key, icon: "icon-share"}), 
     ]); 
 
     self.developmentTiles = ko.computed(function() {
