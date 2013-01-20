@@ -1,34 +1,81 @@
-function Tile(name, link, initialColor) {
+(function() {
+  function Tile(data) {
   var self = this; 
-  self.name = name; 
-  self.link = link; 
-  self.color = ko.observable(initialColor); 
+  self.name = ko.observable(data.name); 
+  self.color = ko.observable(data.color); 
+  self.link = ko.observable(data.link); 
+  self.section = ko.observable(data.section);
+  self.icon = data.icon;
+  self.width = data.width;
+  self.style = data.style;
+  self.texty = data.texty;
+  self.image = data.image; 
 }
 
 function TilesViewModel() {
     var self = this; 
 
-    this.currentTile = new Tile();
+    self.name = ko.observable();
+    self.color = ko.observable(); 
+    self.link = ko.observable();
+    self.section = ko.observable();
 
-    self.availableColors =[
-      { value: "dark blue", key: "bg-color-blueDark" },
-      { value: "orange", key: "bg-color-orange" },
-      { value: "dark green", key: "bg-color-greenDark" },
-      { value: "purple", key: "bg-color-purple" },
-      { value: "red", key: "bg-color-red" },
-      { value: "yellow", key: "bg-color-yellow" },
-      { value: "blue", key: "bg-color-blue" }     
+    self.addTile = function() {
+      var self = this; 
+      var section = ""; 
+
+      if (self.section().name === "documentations") { section = 1 }
+      if (self.section().name === "socialmedia") { console.log("adf"); section = 2; }
+      else section = 0; 
+
+      if (self.name()) {
+        self.tiles.push(new Tile({ 
+          name: self.name(), 
+          color: self.availableColors[2], 
+          link: self.link(), 
+          section: self.sections[section].name
+        }));
+      }
+    };
+
+    self.removeTile = function(tile) { self.tiles.remove(tile) }
+
+    self.availableColors = [
+      { name: "dark blue", key: "bg-color-blueDark" },
+      { name: "orange", key: "bg-color-orange" },
+      { name: "dark green", key: "bg-color-greenDark" },
+      { name: "purple", key: "bg-color-purple" },
+      { name: "red", key: "bg-color-red" },
+      { name: "yellow", key: "bg-color-yellow" },
+      { name: "blue", key: "bg-color-blue" }     
+    ];
+
+    self.sections = [
+      { name: "development" },
+      { name: "documentations"}, 
+      { name: "socialmedia"}
     ];
 
     self.tiles = ko.observableArray([
-      new Tile("localhost", "localhost:3000", self.availableColors[0]), 
-      new Tile("confluence", "http://goltermann.cc:8090/dashboard.action", self.availableColors[0])
     ]); 
 
-    self.addTile = function(formData) {
-      self.tiles.push(new Tile(formData[0].value, formData[1].value, formData[3].value));
-    }
+    self.developmentTiles = ko.computed(function() {
+      return self.tiles().filter(function( tile ) {
+        return tile.section() == "development";
+      });
+    });
+    self.documentationsTiles = ko.computed(function() {
+      return self.tiles().filter(function( tile ) {
+        return tile.section() == "documentations";
+      });
+    });
+    self.socialmediaTiles = ko.computed(function() {
+      return self.tiles().filter(function( tile ) {
+        return tile.section() == "socialmedia";s
+      });
+    });
 }
 
 // Activates knockout.js
 ko.applyBindings(new TilesViewModel());
+})();

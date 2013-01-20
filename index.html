@@ -48,127 +48,90 @@
    
                   <h2>Entwicklung / Programmierung</h2>
 
-                  <div data-bind="foreach:tiles">
-                     <a class="tile wide" data-bind="css: color, attr: { href: link, title: name }" >
-
+                  <div data-bind="foreach:developmentTiles">
+                     <a class="tile" data-bind="css: style, attr: { href: link, title: name}" target="_blank"> 
+                        <!-- ko if: icon -->
+                        <div class="image-wrapper">
+                           <span class="icon" data-bind="css: icon"></span>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: icon -->
+                        <div class="column-text">
+                           <span class="text4" data-bind="text: texty"></span>
+                        </div>
+                        <!-- /ko -->   
+                        <span class="app-label" data-bind="text: name"></span>
                      </a>
                   </div>
-
-                  <div data-bind="foreach: tiles">
-                     <div data-bind="text: name"></div>
-                     <div data-bind="text: link"></div>
-                  </div>
-   
-                  <a class="tile wide imagetext bg-color-blueDark" href="./tiles-templates.html">
-                     <div class="image-wrapper">
-                        <img src="bootmetro/img/metro-tiles.jpg" />
-                     </div>
-                     <div class="column-text">
-                        <div class="text4">List of all tile templates: square, wide, widepeek, with images or text only.</div>
-                     </div>
-                     <div class="app-label">Tiles Templates</div>
-                  </a>
-   
-                  <a class="tile wide imagetext wideimage bg-color-orange" href="./appbar-demo.html">
-                     <img src="bootmetro/img/appbar.png" alt=""/>
-                     <div class="textover-wrapper bg-color-blue">
-                        <div class="text2">Application Bar</div>
-                     </div>
-                  </a>
-   
-                  <a class="tile app wide bg-color-greenDark" href="./table.html">
-                     <div class="image-wrapper">
-                        <img src="bootmetro/img/My Apps.png" alt=""/>
-                     </div>
-                     <div class="app-label">Styled Table</div>
-                  </a>
-   
-                  <a class="tile app bg-color-purple" href="./listviews.html">
-                     <div class="image-wrapper">
-                        <span class="icon icon-list-2"></span>
-                     </div>
-                     <span class="app-label">ListView</span>
-                  </a>
-   
-                  <a class="tile app bg-color-red" href="./charms-demo.html">
-                     <div class="image-wrapper">
-                        <span class="icon icon-publish"></span>
-                     </div>
-                     <span class="app-label">[TODO] Charms</span>
-                  </a>
-   
-                  <a class="tile app bg-color-yellow" href="./images.html">
-                     <div class="image-wrapper">
-                        <span class="icon icon-images"></span>
-                     </div>
-                     <span class="app-label">[TODO] Images</span>
-                  </a>
-   
-                  <a class="tile app bg-color-blueDark" href="./icons.html">
-                     <div class="image-wrapper">
-                        <span class="icon icon-IcoMoon" ></span>
-                     </div>
-                     <span class="app-label">Icons</span>
-                  </a>
    
                </div>
    
                <div id="section2" class="metro-section tile-span-4">
    
-                  <h2>Social Media</h2>
-   
-                  <a class="tile wide imagetext bg-color-blue" href="./scaffolding.html">
-                     <div class="image-wrapper">
-                        <img src="bootmetro/img/My Apps.png" />
-                     </div>
-                     <div class="column-text">
-                        <div class="text">Grid system</div>
-                        <div class="text">Layouts</div>
-                        <div class="text">Responsive design</div>
-                     </div>
-                     <span class="app-label">SCAFFOLDING</span>
-                  </a>
-   
-                  <a class="tile wide imagetext bg-color-blueDark" href="./base-css.html">
-                     <div class="image-wrapper">
-                        <img src="bootmetro/img/Coding app.png" />
-                     </div>
-                     <div class="column-text">
-                        <div class="text">Typography</div>
-                        <div class="text">Tables</div>
-                        <div class="text">Forms</div>
-                        <div class="text">Buttons</div>
-                     </div>
-                     <span class="app-label">BASE CSS</span>
-                  </a>
-   
-                  <a class="tile app bg-color-orange" href="./components.html">
-                     <div class="image-wrapper">
-                        <img src="bootmetro/img/RegEdit.png" alt="" />
-                     </div>
-                     <span class="app-label">COMPONENTS</span>
-                  </a>
-   
-                  <a class="tile app bg-color-red" href="./javascript.html">
-                     <div class="image-wrapper">
-                        <img src="bootmetro/img/Devices.png" alt="" />
-                     </div>
-                     <span class="app-label">JAVASCRIPT</span>
-                  </a>
+                  <h2>Dokumentationen</h2>
+
+                  <div data-bind="foreach:documentationsTiles">
+                     <a class="tile" data-bind="css: style, attr: { href: link, title: name}" target="_blank"> 
+                        <!-- ko if: icon -->
+                        <div class="image-wrapper">
+                           <span class="icon" data-bind="css: icon"></span>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: image --> 
+                        <div class="image-wrapper">
+                           <img data-bind="attr: { src: image }"/>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: icon -->
+                        <div class="column-text">
+                           <span class="text4" data-bind="text: texty"></span>
+                        </div>
+                        <!-- /ko -->   
+                        <span class="app-label" data-bind="text: name"></span>
+                     </a>
+                  </div>
    
                </div>
-   
+
                <div id="section3" class="metro-section tile-span-2">
+                  <h2>Social Media</h2>
+
+                  <div data-bind="foreach:socialmediaTiles">
+                     <a class="tile" data-bind="css: style, attr: { href: link, title: name}" target="_blank"> 
+                        <!-- ko if: icon -->
+                        <div class="image-wrapper">
+                           <span class="icon" data-bind="css: icon"></span>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: icon -->
+                        <div class="column-text">
+                           <span class="text4" data-bind="text: texty"></span>
+                        </div>
+                        <!-- /ko -->   
+                        <span class="app-label" data-bind="text: name"></span>
+                     </a>
+                  </div>
+               </div>
+   
+               <div id="section4" class="metro-section tile-span-2">
                   <h2>Add Tile</h2>
 
                   <a class="tile wide imagetext imagetext bg-color-blue">
                      <div class="column-text">
                         Name: <input data-bind="value: name" />
-                        Color: <select data-bind="options: $root.availableColors, value: 'color', optionsText: 'value'"></select>
+                        Section: <select data-bind="options: sections, optionsText: 'name', value: section"></select>
                      </div>
                   </a>
-                  <a class="tile wide imagetext bg-color-orange" href="./components.html">
+                  <a class="tile wide imagetext bg-color-orange">
                      <div class="column-text">
+                        Link: <input data-bind="value: link" />
+                        Color: <select data-bind="options: availableColors, optionsText: 'name', value: color"></select>
+                     </div>
+                  </a>
+
+                  <a class="tile wide imagetext bg-color-greenDark">
+                     <div class="column-text">
+                        
                         <button data-bind="click: addTile">Add tile to dashboard</button>
                      </div>
                   </a>
