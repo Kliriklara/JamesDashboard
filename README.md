@@ -23,43 +23,96 @@ Knockout:
 * URL routing is NOT included
 * Data-Storage is also NOT included
 * Implement custom behaviours as new declarative bindings
+* has very nice interactive tutorials
 * has KO Observables
 
-KO Observables is somewhat equivalent to Ember properties. But are some differences. In Ember, the dependencies of properties are defined by the developer. In Knockout Observables are automatically determined. 
+KO Observables is somewhat equivalent to Ember properties. But are some differences. In Ember, the dependencies of properties are defined by the developer. In Knockout they are automatically determined. Ember has also a great implementation of only updating the part of the DOM that actually changes when a object is updated. It wraps some metamorph code around the code. That might affect the legibility of the source code but does not have any impacts on the application itself. The metamorph code looks like that: 
 
-
-When I loop through my collection in handlebars I end up with a bunch of metamorph code around my items:
+```
 <script id="metamorph-105-start" type="text/x-placeholder"></script>
+```
 
-ember.js a little bit more magic. only updating the dom where something changed. with metamorphs 
-ows for the most declarative code and has a significant amount of effort put into only updating the part of the DOM that changes on object update (uses metamorph, it's a clever hack).
-
-schneller 
-http://jsperf.com/angular-vs-knockout-vs-ember/10
+I also found a chart, which says that KnockoutJS is faster than EmberJS: http://jsperf.com/angular-vs-knockout-vs-ember/10. But that should not be the main criteria when choosing between those two. 
 
 
 ## Bootmetro
 [Bootmetro](http://aozora.github.com/bootmetro/) is a Windows 8 Metro style web library, which is built on top of Twitter Bootstrap and provides some styles and javascript snippets for a Windows 8 App feeling. 
+
 ### Other Modern UI Style Libraries
-I found some interesting 
 
-Template http://metro-webdesign.info/
-https://github.com/oazabir/Droptiles
-This one is built using ASP.NET
-
-jquery plugin easily enable metro interfaces on the web 
-http://www.drewgreenwell.com/projects/metrojs
-http://jqmetro.codeplex.com/
+There are other interesting libraries for creating Windows 8 style web applications: 
+* Template http://metro-webdesign.info/
+* Droptiles https://github.com/oazabir/Droptiles
+* MetroJS http://www.drewgreenwell.com/projects/metrojs
+* jQuery Metro http://jqmetro.codeplex.com/
 
 
 ## How it works 
 
-The most important .. to realise ... is the method observables(). It is called on the KnockoutJS namespace ko. Observables are special JavaScript objects, that can notify subscribers about changes and automatically detect dependencies. This allows us to syncronize Models and ViewModels when the value of a Model attribute is modified. 
-
+### Include Bootmetro 
+Include styles which come with the Bootmetro Library at the top of the application and the javasript files at the bottom. 
 
 ```
-node start.js
+<!-- top -->
+<link rel="stylesheet" type="text/css" href="bootmetro/css/bootmetro.css">
+<!-- bottom -->
+<script type="text/javascript" src="bootmetro/scripts/bootmetro.js"></script>
 ```
+Then you should already be able to use some predefined classes like "container-fluid", "row-fluid" (from twitter bootstrap) and "metro-sections", "tile" for some nice modern UI style rectangles. 
+
+### Working with KnockoutJS
+Include the framework. 
+
+```
+<!-- top -->
+<script type='text/javascript' src='knockout-2.2.1.js'></script>
+```
+
+The most important line is the following: 
+```
+ko.applyBindings(new TilesViewModel());
+```
+It is called on the KnockoutJS namespace ko and activates the important "data-bind" attribute of KnockoutJS. 
+
+Now we can use Observables, which are special JavaScript objects, that can notify subscribers about changes and automatically detect dependencies. This allows us to syncronize Models and ViewModels when the value of a Model attribute is modified. 
+
+```
+self.name = ko.observable();
+self.color = ko.observable(); 
+```
+
+### Organization of the application
+Model: 
+```
+function Tile(data) {
+  var self = this; 
+  self.name = ko.observable(data.name); 
+  self.color = ko.observable(data.color); 
+  self.link = ko.observable(data.link); 
+  self.section = ko.observable(data.section);
+}
+```
+ViewModel: 
+```
+function TilesViewModel() {
+  addTile = function() {};                      // add a tile
+  removeTile = function() {};                   // remove a tile
+  self.availableColors = [];                    // array with predefined colors
+  self.sections = [];                           // array with predefined sections
+  self.tiles = ko.observableArray([]);
+  self.developmentTiles = ko.computed(function() {}
+}
+```
+
+View: 
+```
+<div data-bind="foreach:developmentTiles">
+   <a class="tile" data-bind="attr: { href: link, title: name}" target="_blank"> 
+      <span class="app-label" data-bind="text: name"></span>
+   </a>
+</div>
+```
+
 ## Improvements 
 drag&drop
 server
